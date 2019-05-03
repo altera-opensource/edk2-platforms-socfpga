@@ -229,6 +229,9 @@ they will be documented with the platform.
 * [Kaby Lake](Platform/Intel/KabylakeOpenBoardPkg)
 * [Purley](Platform/Intel/PurleyOpenBoardPkg)
 
+### SoCFPGA Platforms
+* [Stratix10](Platform/Intel/Stratix10)
+
 For more information, see the
 [EDK II Minimum Platform Specification](https://edk2-docs.gitbooks.io/edk-ii-minimum-platform-specification).
 ### Other Platforms

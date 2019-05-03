@@ -1,0 +1,22 @@
+#
+#  Copyright (c) 2013-2018, Intel All rights reserved.
+#
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#
+
+[Defines]
+  DEC_SPECIFICATION              = 0x0001001B
+  PACKAGE_NAME                   = Stratix10SocPkg
+  PACKAGE_GUID                   = 45533DD0-C41F-4ab6-A5DF-65B52684AC60
+  PACKAGE_VERSION                = 0.1
+
+[Includes.common]
+
+[Guids.common]
+  gStratix10SocFpgaTokenSpaceGuid = { 0x0fe272eb, 0xb2cf, 0x4390, { 0xa5, 0xc4, 0x60, 0x13, 0x2c, 0x6b, 0xd0, 0x34 } }
+
+[PcdsFeatureFlag.common]
+
+[PcdsFixedAtBuild.common]
+
+
