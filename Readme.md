@@ -247,6 +247,9 @@ they will be documented with the platform.
 * [Whiskey Lake](Platform/Intel/WhiskeylakeOpenBoardPkg)
 * [Comet Lake](Platform/Intel/CometlakeOpenBoardPkg)
 
+### SoCFPGA Platforms
+* [Stratix10](Platform/Intel/Stratix10)
+
 For more information, see the
 [EDK II Minimum Platform Specification](https://edk2-docs.gitbooks.io/edk-ii-minimum-platform-specification).
 ### Other Platforms

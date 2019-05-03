@@ -1,0 +1,49 @@
+/** @file
+*
+*  Stratix 10 Platform Library
+*
+*  Copyright (c) 2019, Intel Corporations All rights reserved.
+*
+*  This program and the accompanying materials
+*  are licensed and made available under the terms and conditions of the BSD License
+*  which accompanies this distribution.  The full text of the license may be found at
+*  http://opensource.org/licenses/bsd-license.php
+*
+*  THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
+*  WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+*
+**/
+
+[Defines]
+  INF_VERSION                    = 0x0001001B
+  BASE_NAME                      = Stratix10PlatformLib
+  FILE_GUID                      = 99E236C7-D5FD-42A0-B520-60C85C4870B8
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = ArmPlatformLib
+
+[Packages]
+  ArmPlatformPkg/ArmPlatformPkg.dec
+  ArmPkg/ArmPkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  MdePkg/MdePkg.dec
+  Platform/Intel/Stratix10/Stratix10SoCPkg.dec
+
+[LibraryClasses]
+  ArmLib
+  ArmMmuLib
+  DebugLib
+  IoLib
+  PcdLib
+
+[Sources.common]
+  Stratix10PlatformLib.c
+  Stratix10Mmu.c
+
+[Sources.AArch64]
+  AArch64/ArmPlatformHelper.S
+
+[FixedPcd]
+  gArmTokenSpaceGuid.PcdArmPrimaryCoreMask
+  gArmTokenSpaceGuid.PcdArmPrimaryCore
+
