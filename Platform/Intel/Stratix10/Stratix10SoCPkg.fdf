@@ -127,8 +127,14 @@ FvNameGuid         = 5eda4200-2c5f-43cb-9da3-0baf74b1b30c
   INF MdeModulePkg/Universal/Disk/UnicodeCollation/EnglishDxe/EnglishDxe.inf
 
   # Multimedia Card Interface
-  INF EmbeddedPkg/Universal/MmcDxe/MmcDxe.inf
-  INF EmbeddedPkg/Drivers/DwEmmcDxe/DwEmmcDxe.inf
+  INF EmbeddedPkg/Universal/NonDiscoverableDeviceDxe/NonDiscoverableDeviceDxe.inf
+  INF EmbeddedPkg/Drivers/DwMmcHcDxe/DwMmcHcDxe.inf
+ # INF MdeModulePkg/Bus/Sd/EmmcDxe/EmmcDxe.inf
+  INF MdeModulePkg/Bus/Sd/SdDxe/SdDxe.inf
+
+
+#  INF EmbeddedPkg/Universal/MmcDxe/MmcDxe.inf
+#  INF EmbeddedPkg/Drivers/DwEmmcDxe/DwEmmcDxe.inf
 
   # Platform Specific Init for DXE phase
   INF Platform/Intel/Stratix10/Drivers/IntelPlatformDxe/IntelPlatformDxe.inf
