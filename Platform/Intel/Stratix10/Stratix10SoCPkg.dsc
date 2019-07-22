@@ -201,6 +201,10 @@
   FileExplorerLib|MdeModulePkg/Library/FileExplorerLib/FileExplorerLib.inf
   DxeServicesLib|MdePkg/Library/DxeServicesLib/DxeServicesLib.inf
 
+
+# NonDiscoverableDeviceRegistrationLib|EmbeddedPkg/Universal/NonDiscoverableDeviceDxe/NonDiscoverableDeviceDxe.inf
+  NonDiscoverableDeviceRegistrationLib|MdeModulePkg/Library/NonDiscoverableDeviceRegistrationLib/NonDiscoverableDeviceRegistrationLib.inf
+
   ArmMmuLib|ArmPkg/Library/ArmMmuLib/ArmMmuBaseLib.inf
   ArmPlatformStackLib|ArmPlatformPkg/Library/ArmPlatformStackLib/ArmPlatformStackLib.inf
   ArmSmcLib|ArmPkg/Library/ArmSmcLib/ArmSmcLib.inf
@@ -397,6 +401,9 @@
 #
 ################################################################################
 [Components.common]
+  EmbeddedPkg/Universal/NonDiscoverableDeviceDxe/NonDiscoverableDeviceDxe.inf
+  MdeModulePkg/Bus/Pci/NonDiscoverablePciDeviceDxe/NonDiscoverablePciDeviceDxe.inf
+
   MdeModulePkg/Universal/PCD/Dxe/Pcd.inf {
     <LibraryClasses>
       PcdLib|MdePkg/Library/BasePcdLibNull/BasePcdLibNull.inf
@@ -464,6 +471,11 @@
   # Multimedia Card Interface
   EmbeddedPkg/Universal/MmcDxe/MmcDxe.inf
   EmbeddedPkg/Drivers/DwEmmcDxe/DwEmmcDxe.inf
+#  Platform/Intel/Stratix10/SocFPGAMmcDxe.inf
+  EmbeddedPkg/Drivers/DwMmcHcDxe/DwMmcHcDxe.inf
+  MdeModulePkg/Bus/Sd/EmmcDxe/EmmcDxe.inf
+  MdeModulePkg/Bus/Sd/SdDxe/SdDxe.inf
+
 
   # Shell
   ShellPkg/Application/Shell/Shell.inf {

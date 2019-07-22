@@ -1,17 +1,10 @@
-#/** @file
+### @file
 #
-#  Copyright (c) 2019, Intel All rights reserved.
+#  Intel Stratix 10 Platform
+#  Copyright (c) 2019, Intel Corporation. All rights reserved.<BR>
 #
-#  This program and the accompanying materials
-#  are licensed and made available under the terms and conditions of the BSD License
-#  which accompanies this distribution.  The full text of the license may be found at
-#  http://opensource.org/licenses/bsd-license.php
-#
-#  THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
-#  WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
-#
-#
-#**/
+#  SPDX-License-Identifier: BSD-3-Clause-Patent
+###
 
 [Defines]
   INF_VERSION                    = 0x0001001B
@@ -28,13 +21,19 @@
   ArmPkg/ArmPkg.dec
   ArmPlatformPkg/ArmPlatformPkg.dec
   EmbeddedPkg/EmbeddedPkg.dec
+  EmbeddedPkg/Drivers/DwMmcHcDxe/DwMmcHcDxe.dec
   MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  Platform/Intel/Stratix10/Stratix10SoCPkg.dec
 
 [LibraryClasses]
   ArmLib
   BaseMemoryLib
   DebugLib
   DxeServicesTableLib
+  IoLib
+  NonDiscoverableDeviceRegistrationLib
+# NonDiscoverableInitLib
   PcdLib
   PrintLib
   SerialPortLib
@@ -42,6 +41,11 @@
   UefiRuntimeServicesTableLib
   UefiLib
   UefiDriverEntryPoint
+
+[Protocols]
+  gEfiDriverBindingProtocolGuid
+  gEmbeddedGpioProtocolGuid
+  gPlatformDwMmcProtocolGuid
 
 [Depex]
   # We depend on these protocols to create the default boot entries
