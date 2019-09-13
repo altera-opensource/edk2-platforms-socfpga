@@ -1,0 +1,34 @@
+## @file
+#  Clock Manager Library instance
+#
+#  Copyright (c) 2019, Intel Corporation. All rights reserved.<BR>
+#
+#  SPDX-License-Identifier: BSD-3-Clause-Patent
+#
+##
+
+[Defines]
+  INF_VERSION                    = 0x0001001B
+  BASE_NAME                      = AgilexClockManagerLib
+  FILE_GUID                      = 90A73C58-A6E3-4EED-A1A3-6F9C7C3E998F
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AgilexClockManagerLib
+
+[Packages]
+  ArmPlatformPkg/ArmPlatformPkg.dec
+  ArmPkg/ArmPkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  MdePkg/MdePkg.dec
+  Platform/Intel/Agilex/AgilexSoCPkg.dec
+
+[LibraryClasses]
+  ArmLib
+  ArmMmuLib
+  DebugLib
+  IoLib
+  PcdLib
+
+[Sources]
+  AgilexClockManager.c
+

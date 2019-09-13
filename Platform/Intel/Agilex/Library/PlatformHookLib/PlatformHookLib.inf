@@ -1,0 +1,41 @@
+## @file
+#  Platform Hook Library instance for UART device.
+#
+#  Copyright (c) 2019, Intel Corporation. All rights reserved.<BR>
+#
+#  SPDX-License-Identifier: BSD-3-Clause-Patent
+#
+##
+
+[Defines]
+  INF_VERSION                    = 0x0001001B
+  BASE_NAME                      = PlatformHookLib
+  FILE_GUID                      = 90A73C58-A6E3-4EED-A1A3-6F9C7C3D998F
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = PlatformHookLib
+  CONSTRUCTOR                    = PlatformHookSerialPortInitialize
+
+[Sources]
+  PlatformHookLib.c
+
+[LibraryClasses]
+  PcdLib
+  PciLib
+  AgilexClockManagerLib
+
+[Packages]
+  Platform/Intel/Agilex/AgilexSoCPkg.dec
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  UefiPayloadPkg/UefiPayloadPkg.dec
+
+[Pcd]
+  gEfiMdeModulePkgTokenSpaceGuid.PcdSerialUseMmio         ## PRODUCES
+  gEfiMdeModulePkgTokenSpaceGuid.PcdSerialRegisterBase    ## PRODUCES
+  gEfiMdeModulePkgTokenSpaceGuid.PcdSerialBaudRate        ## PRODUCES
+  gEfiMdeModulePkgTokenSpaceGuid.PcdSerialRegisterStride  ## PRODUCES
+  gEfiMdeModulePkgTokenSpaceGuid.PcdSerialClockRate       ## PRODUCES
+  gEfiMdePkgTokenSpaceGuid.PcdUartDefaultBaudRate         ## PRODUCES
+  gEfiMdeModulePkgTokenSpaceGuid.PcdPciSerialParameters   ## PRODUCES
+

@@ -1,0 +1,46 @@
+### @file
+#
+#  Stratix 10 Platform Library
+#  Copyright (c) 2019, Intel Corporation All rights reserved.<BR>
+#
+#  SPDX-License-Identifier: BSD-3-Clause-Patent
+###
+
+[Defines]
+  INF_VERSION                    = 0x0001001B
+  BASE_NAME                      = Stratix10PlatformLib
+  FILE_GUID                      = 99E236C7-D5FD-42A0-B520-60C85C4870B8
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = ArmPlatformLib
+
+[Packages]
+  ArmPlatformPkg/ArmPlatformPkg.dec
+  ArmPkg/ArmPkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  MdePkg/MdePkg.dec
+  Platform/Intel/Agilex/AgilexSoCPkg.dec
+
+[LibraryClasses]
+  ArmLib
+  ArmMmuLib
+  DebugLib
+  PlatformHookLib
+  IoLib
+  PcdLib
+
+[Sources.common]
+  Stratix10PlatformLib.c
+  Stratix10Mmu.c
+  ../AgilexClockManager/AgilexClockManager.c
+
+[Sources.AArch64]
+  AArch64/ArmPlatformHelper.S
+
+[FixedPcd]
+  gArmTokenSpaceGuid.PcdArmPrimaryCoreMask
+  gArmTokenSpaceGuid.PcdArmPrimaryCore
+
+[Pcd]
+  gEfiMdeModulePkgTokenSpaceGuid.PcdSerialClockRate       ## PRODUCES
+
