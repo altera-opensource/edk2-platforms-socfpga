@@ -1,0 +1,55 @@
+
+### @file
+#
+#  Intel Stratix 10 Platform
+#  Copyright (c) 2019, Intel Corporation. All rights reserved.<BR>
+#
+#  SPDX-License-Identifier: BSD-3-Clause-Patent
+###
+
+[Defines]
+  INF_VERSION                    = 0x0001001B
+  BASE_NAME                      = IntelPlatformDxe
+  FILE_GUID                      = AB87E291-1689-4c7b-B613-FB54A0E38CEA
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = IntelPlatformDxeEntryPoint
+
+[Sources.common]
+  IntelPlatformDxe.c
+
+[Packages]
+  ArmPkg/ArmPkg.dec
+  ArmPlatformPkg/ArmPlatformPkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  MdePkg/MdePkg.dec
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  EmbeddedPkg/Drivers/DwMmcHcDxe/DwMmcHcDxe.dec
+  Platform/Intel/Agilex/AgilexSoCPkg.dec
+
+[LibraryClasses]
+  AgilexClockManagerLib
+  ArmLib
+  BaseMemoryLib
+  DebugLib
+  DxeServicesTableLib
+  IoLib
+  NonDiscoverableDeviceRegistrationLib
+  PcdLib
+  PrintLib
+  SerialPortLib
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  UefiLib
+  UefiDriverEntryPoint
+
+[Protocols]
+  gEfiDriverBindingProtocolGuid
+  gEmbeddedGpioProtocolGuid
+  gPlatformDwMmcProtocolGuid
+
+[Depex]
+  # We depend on these protocols to create the default boot entries
+  gEfiVariableArchProtocolGuid AND gEfiVariableWriteArchProtocolGuid

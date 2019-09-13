@@ -1,0 +1,23 @@
+#
+#  Copyright (c) 2013-2018, Intel All rights reserved.
+#
+#  SPDX-License-Identifier: BSD-3-Clause-Patent
+#
+
+[Defines]
+  DEC_SPECIFICATION              = 0x0001001B
+  PACKAGE_NAME                   = Agilex10SocPkg
+  PACKAGE_GUID                   = E9E1283D-5800-4FBE-A945-06070DB8E77A
+  PACKAGE_VERSION                = 0.1
+
+[Includes]
+  Include
+
+[Guids.common]
+  gAgilexSoCFpgaTokenSpaceGuid =    { 0xb1b76675, 0xd9b0, 0x4279, { 0x86, 0xa7, 0xcc, 0x60, 0x88, 0x28, 0xf0, 0xb8 } }
+
+[PcdsFeatureFlag.common]
+
+[PcdsFixedAtBuild.common]
+
+
