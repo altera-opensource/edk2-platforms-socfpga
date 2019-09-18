@@ -1,15 +1,11 @@
 /** @file
-*
-*  Copyright (c) 2019, Intel All rights reserved.
-*
-*  This program and the accompanying materials
-*  are licensed and made available under the terms and conditions of the BSD License
-*  which accompanies this distribution.  The full text of the license may be found at
-*  http://opensource.org/licenses/bsd-license.php
-*
-*  THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
-*  WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
-*
+
+  Stratix 10 Platform Entry code
+
+  Copyright (c) 2019, Intel Corporation. All rights reserved.<BR>
+
+  SPDX-License-Identifier: BSD-3-Clause-Patent
+
 **/
 
 
@@ -23,11 +19,10 @@
 #include <Library/DxeServicesTableLib.h>
 #include <Library/IoLib.h>
 #include <Library/MemoryAllocationLib.h>
-
 #include <Library/NonDiscoverableDeviceRegistrationLib.h>
 #include <Protocol/NonDiscoverableDevice.h>
-
 #include <Library/PrintLib.h>
+#include <Library/S10ClockManager/S10ClockManager.h>
 #include <Library/UefiBootServicesTableLib.h>
 #include <Library/UefiLib.h>
 #include <Library/UefiRuntimeServicesTableLib.h>
@@ -43,7 +38,7 @@ DwMmcCapability[1] = {
     .SlotType    = RemovableSlot,
     .CardType    = SdCardType,
     .Voltage30   = 1,
-    .BaseClkFreq = 50000
+    .BaseClkFreq = 5000
   }
 };
 
@@ -60,6 +55,7 @@ IntelSocFpgaMmcGetCapability (
   }
 
   CopyMem (Capability, &DwMmcCapability[0], sizeof (DW_MMC_HC_SLOT_CAP));
+  Capability->BaseClkFreq = S10ClockManagerGetMmcClock();
 
   return EFI_SUCCESS;
 }
