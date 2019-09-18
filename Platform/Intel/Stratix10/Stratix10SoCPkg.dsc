@@ -1,7 +1,7 @@
 #
 #  Copyright (c) 2013-2018, Intel All rights reserved.
 #
-#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#  SPDX-License-Identifier: BSD-3-Clause-Patent
 #
 
 ################################################################################
@@ -27,6 +27,8 @@
 # Pcd Section - list of all EDK II PCD Entries defined by this Platform
 #
 ################################################################################
+[PcdsPatchableInModule.common]
+  gEfiMdeModulePkgTokenSpaceGuid.PcdSerialClockRate|184320
 
 [PcdsFixedAtBuild.common]
   gEfiMdeModulePkgTokenSpaceGuid.PcdEmuVariableNvModeEnable|TRUE
@@ -103,7 +105,6 @@
   #  DEBUG_GCD       0x00100000  // Global Coherency Database changes
   #  DEBUG_CACHE     0x00200000  // Memory range cachability changes
   #  DEBUG_ERROR     0x80000000  // Error
-#  gEfiMdePkgTokenSpaceGuid.PcdDebugPrintErrorLevel|0x803010CF
   gEfiMdePkgTokenSpaceGuid.PcdDebugPrintErrorLevel|0x8000000F
 
   gEfiMdePkgTokenSpaceGuid.PcdReportStatusCodePropertyMask|0x00
@@ -201,8 +202,6 @@
   FileExplorerLib|MdeModulePkg/Library/FileExplorerLib/FileExplorerLib.inf
   DxeServicesLib|MdePkg/Library/DxeServicesLib/DxeServicesLib.inf
 
-
-# NonDiscoverableDeviceRegistrationLib|EmbeddedPkg/Universal/NonDiscoverableDeviceDxe/NonDiscoverableDeviceDxe.inf
   NonDiscoverableDeviceRegistrationLib|MdeModulePkg/Library/NonDiscoverableDeviceRegistrationLib/NonDiscoverableDeviceRegistrationLib.inf
 
   ArmMmuLib|ArmPkg/Library/ArmMmuLib/ArmMmuBaseLib.inf
@@ -231,7 +230,9 @@
   SemihostLib|ArmPkg/Library/SemihostLib/SemihostLib.inf
 
   SerialPortLib|MdeModulePkg/Library/BaseSerialPortLib16550/BaseSerialPortLib16550.inf
-  PlatformHookLib|MdeModulePkg/Library/BasePlatformHookLibNull/BasePlatformHookLibNull.inf
+  PlatformHookLib|Platform/Intel/Stratix10/Library/PlatformHookLib/PlatformHookLib.inf
+  S10ClockManager|Platform/Intel/Stratix10/Library/S10ClockManager/S10ClockManager.inf
+  
 
   SynchronizationLib|MdePkg/Library/BaseSynchronizationLib/BaseSynchronizationLib.inf
   UefiBootManagerLib|MdeModulePkg/Library/UefiBootManagerLib/UefiBootManagerLib.inf
@@ -255,7 +256,6 @@
   PciExpressLib|MdePkg/Library/BasePciExpressLib/BasePciExpressLib.inf
 
   CapsuleLib|MdeModulePkg/Library/DxeCapsuleLibNull/DxeCapsuleLibNull.inf
-#  GenericBdsLib|IntelFrameworkModulePkg/Library/GenericBdsLib/GenericBdsLib.inf
   CustomizedDisplayLib|MdeModulePkg/Library/CustomizedDisplayLib/CustomizedDisplayLib.inf
 
   #
@@ -421,7 +421,6 @@
   #
   MdeModulePkg/Core/Dxe/DxeMain.inf {
     <LibraryClasses>
-      #PcdLib|MdePkg/Library/BasePcdLibNull/BasePcdLibNull.inf
       NULL|MdeModulePkg/Library/DxeCrc32GuidedSectionExtractLib/DxeCrc32GuidedSectionExtractLib.inf
   }
 
@@ -469,11 +468,7 @@
   MdeModulePkg/Universal/WatchdogTimerDxe/WatchdogTimer.inf
 
   # Multimedia Card Interface
-  EmbeddedPkg/Universal/MmcDxe/MmcDxe.inf
-  EmbeddedPkg/Drivers/DwEmmcDxe/DwEmmcDxe.inf
-#  Platform/Intel/Stratix10/SocFPGAMmcDxe.inf
   EmbeddedPkg/Drivers/DwMmcHcDxe/DwMmcHcDxe.inf
-  MdeModulePkg/Bus/Sd/EmmcDxe/EmmcDxe.inf
   MdeModulePkg/Bus/Sd/SdDxe/SdDxe.inf
 
 
@@ -487,7 +482,6 @@
       NULL|ShellPkg/Library/UefiShellDriver1CommandsLib/UefiShellDriver1CommandsLib.inf
       NULL|ShellPkg/Library/UefiShellDebug1CommandsLib/UefiShellDebug1CommandsLib.inf
       NULL|ShellPkg/Library/UefiShellInstall1CommandsLib/UefiShellInstall1CommandsLib.inf
-#      NULL|ShellPkg/Library/UefiShellNetwork1CommandsLib/UefiShellNetwork1CommandsLib.inf
       HandleParsingLib|ShellPkg/Library/UefiHandleParsingLib/UefiHandleParsingLib.inf
       PrintLib|MdePkg/Library/BasePrintLib/BasePrintLib.inf
       BcfgCommandLib|ShellPkg/Library/UefiShellBcfgCommandLib/UefiShellBcfgCommandLib.inf
@@ -499,9 +493,13 @@
   }
 
   #
-  # Platform Specific Init for DXE phase
+  # Platform Specific Init
   #
   Platform/Intel/Stratix10/Drivers/IntelPlatformDxe/IntelPlatformDxe.inf
+  Platform/Intel/Stratix10/Library/PlatformHookLib/PlatformHookLib.inf {
+    <LibraryClasses>
+    S10ClockManager|Platform/Intel/Stratix10/Library/S10ClockManager/S10ClockManager.inf
+  }
 
 [BuildOptions]
   #-------------------------------
