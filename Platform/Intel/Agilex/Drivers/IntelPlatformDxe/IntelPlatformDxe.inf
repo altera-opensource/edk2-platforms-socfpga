@@ -28,6 +28,7 @@
   EmbeddedPkg/EmbeddedPkg.dec
   EmbeddedPkg/Drivers/DwMmcHcDxe/DwMmcHcDxe.dec
   Platform/Intel/Agilex/AgilexSoCPkg.dec
+  Silicon/Synopsys/DesignWare/DesignWare.dec
 
 [LibraryClasses]
   AgilexClockManagerLib
@@ -53,3 +54,5 @@
 [Depex]
   # We depend on these protocols to create the default boot entries
   gEfiVariableArchProtocolGuid AND gEfiVariableWriteArchProtocolGuid
+[Guids]
+  gDwEmacNetNonDiscoverableDeviceGuid
