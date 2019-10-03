@@ -192,6 +192,12 @@
   gEfiMdePkgTokenSpaceGuid.PcdDriverDiagnostics2Disable|TRUE
 
 [LibraryClasses.common]
+  NetLib|NetworkPkg/Library/DxeNetLib/DxeNetLib.inf
+  UdpIoLib|NetworkPkg/Library/DxeUdpIoLib/DxeUdpIoLib.inf
+  TcpIoLib|NetworkPkg/Library/DxeTcpIoLib/DxeTcpIoLib.inf
+  DpcLib|NetworkPkg/Library/DxeDpcLib/DxeDpcLib.inf
+  IpIoLib|NetworkPkg/Library/DxeIpIoLib/DxeIpIoLib.inf
+
   ArmLib|ArmPkg/Library/ArmLib/ArmBaseLib.inf
   ArmGenericTimerCounterLib|ArmPkg/Library/ArmGenericTimerPhyCounterLib/ArmGenericTimerPhyCounterLib.inf
   AcpiLib|EmbeddedPkg/Library/AcpiLib/AcpiLib.inf
@@ -476,6 +482,17 @@
   }
   MdeModulePkg/Universal/WatchdogTimerDxe/WatchdogTimer.inf
 
+  # Networking
+  NetworkPkg/Dhcp4Dxe/Dhcp4Dxe.inf
+  NetworkPkg/MnpDxe/MnpDxe.inf
+  NetworkPkg/Mtftp4Dxe/Mtftp4Dxe.inf
+  NetworkPkg/Udp4Dxe/Udp4Dxe.inf
+  NetworkPkg/DpcDxe/DpcDxe.inf
+  NetworkPkg/Ip4Dxe/Ip4Dxe.inf
+  NetworkPkg/ArpDxe/ArpDxe.inf
+  NetworkPkg/TcpDxe/TcpDxe.inf
+  NetworkPkg/UefiPxeBcDxe/UefiPxeBcDxe.inf
+
   # Multimedia Card Interface
 #  EmbeddedPkg/Universal/MmcDxe/MmcDxe.inf
 #  EmbeddedPkg/Drivers/DwEmmcDxe/DwEmmcDxe.inf
@@ -494,7 +511,7 @@
       NULL|ShellPkg/Library/UefiShellDriver1CommandsLib/UefiShellDriver1CommandsLib.inf
       NULL|ShellPkg/Library/UefiShellDebug1CommandsLib/UefiShellDebug1CommandsLib.inf
       NULL|ShellPkg/Library/UefiShellInstall1CommandsLib/UefiShellInstall1CommandsLib.inf
-#      NULL|ShellPkg/Library/UefiShellNetwork1CommandsLib/UefiShellNetwork1CommandsLib.inf
+      NULL|ShellPkg/Library/UefiShellNetwork1CommandsLib/UefiShellNetwork1CommandsLib.inf
       HandleParsingLib|ShellPkg/Library/UefiHandleParsingLib/UefiHandleParsingLib.inf
       PrintLib|MdePkg/Library/BasePrintLib/BasePrintLib.inf
       BcfgCommandLib|ShellPkg/Library/UefiShellBcfgCommandLib/UefiShellBcfgCommandLib.inf
@@ -503,6 +520,12 @@
       gEfiMdePkgTokenSpaceGuid.PcdDebugPropertyMask|0xFF
       gEfiShellPkgTokenSpaceGuid.PcdShellLibAutoInitialize|FALSE
       gEfiMdePkgTokenSpaceGuid.PcdUefiLibMaxPrintBufferSize|8000
+  }
+
+  # Network
+  Silicon/Synopsys/DesignWare/Drivers/DwEmacSnpDxe/DwEmacSnpDxe.inf {
+    <LibraryClasses>
+      DmaLib|EmbeddedPkg/Library/NonCoherentDmaLib/NonCoherentDmaLib.inf
   }
 
   #

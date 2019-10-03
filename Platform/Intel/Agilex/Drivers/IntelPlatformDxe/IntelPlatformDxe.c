@@ -79,6 +79,70 @@ IntelSocFpgaMmcGetCapability,
 IntelSocFpgaMmcCardDetect
 };
 
+
+
+STATIC EFI_ACPI_ADDRESS_SPACE_DESCRIPTOR mDwEmacNetDesc[] = {
+ {
+    ACPI_ADDRESS_SPACE_DESCRIPTOR,                    // Desc
+    sizeof (EFI_ACPI_ADDRESS_SPACE_DESCRIPTOR) - 3,   // Len
+    ACPI_ADDRESS_SPACE_TYPE_MEM,                      // ResType
+    0,                                                // GenFlag
+    0,                                                // SpecificFlag
+    32,                                               // AddrSpaceGranularity
+    0xff800000,          // AddrRangeMin
+    0xff800000 +
+	SIZE_4KB - 1,                                     // AddrRangeMax
+    0,                                                // AddrTranslationOffset
+    SIZE_4KB,                                         // AddrLen
+  }, {
+    ACPI_ADDRESS_SPACE_DESCRIPTOR,                    // Desc
+    sizeof (EFI_ACPI_ADDRESS_SPACE_DESCRIPTOR) - 3,   // Len
+    ACPI_ADDRESS_SPACE_TYPE_MEM,                      // ResType
+    0,                                                // GenFlag
+    0,                                                // SpecificFlag
+    32,                                               // AddrSpaceGranularity
+    0x021122334455,       // AddrRangeMin
+    0x021122334455,       // AddrRangeMax
+    0,                                                // AddrTranslationOffset
+    1,                                                // AddrLen
+  }, {
+    ACPI_END_TAG_DESCRIPTOR                           // Desc
+  }
+};
+
+STATIC
+EFI_STATUS
+RegisterEthernetDevice (
+IN EFI_HANDLE         *Handle
+)
+{
+  NON_DISCOVERABLE_DEVICE             *Device;
+  EFI_STATUS                          Status;
+
+  Device = (NON_DISCOVERABLE_DEVICE *)AllocateZeroPool (sizeof (*Device));
+  if (Device == NULL) {
+    return EFI_OUT_OF_RESOURCES;
+  }
+
+  Device->Type = &gDwEmacNetNonDiscoverableDeviceGuid;
+  Device->DmaType = NonDiscoverableDeviceDmaTypeNonCoherent;
+  Device->Resources = mDwEmacNetDesc;
+
+  Status = gBS->InstallMultipleProtocolInterfaces (Handle,
+                  &gEdkiiNonDiscoverableDeviceProtocolGuid, Device,
+                  NULL);
+  if (EFI_ERROR (Status)) {
+    goto FreeDevice;
+  }
+  return EFI_SUCCESS;
+
+  FreeDevice:
+  FreePool (Device);
+
+  return Status;
+
+}
+
 EFI_STATUS
 EFIAPI
 IntelPlatformDxeEntryPoint (
@@ -107,6 +171,7 @@ IntelPlatformDxeEntryPoint (
                   EFI_NATIVE_INTERFACE,
                   &mDwMmcDevice);
 
+  RegisterEthernetDevice(&ImageHandle);
 
   return Status;
 }
