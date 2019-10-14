@@ -19,7 +19,7 @@
 ################################################################################
 
 [FD.IntelStratix10_EFI]
-BaseAddress   = 0x0050000|gArmTokenSpaceGuid.PcdFdBaseAddress  # The base address of the Firmware in remapped DRAM.
+BaseAddress   = 0x10000000|gArmTokenSpaceGuid.PcdFdBaseAddress  # The base address of the Firmware in remapped DRAM.
 Size          = 0x00100000|gArmTokenSpaceGuid.PcdFdSize         # The size in bytes
 ErasePolarity = 1
 BlockSize     = 0x00000001
