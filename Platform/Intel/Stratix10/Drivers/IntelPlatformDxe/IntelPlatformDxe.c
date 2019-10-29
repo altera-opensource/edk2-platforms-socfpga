@@ -55,7 +55,7 @@ IntelSocFpgaMmcGetCapability (
   }
 
   CopyMem (Capability, &DwMmcCapability[0], sizeof (DW_MMC_HC_SLOT_CAP));
-  Capability->BaseClkFreq = S10ClockManagerGetMmcClock();
+  Capability->BaseClkFreq = S10ClockManagerGetMmcClock() / 1000;
 
   return EFI_SUCCESS;
 }
