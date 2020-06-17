@@ -114,11 +114,6 @@
   # gEmbeddedTokenSpaceGuid
   #-------------------------------
 
-  # MMC
-  gEmbeddedTokenSpaceGuid.PcdDwEmmcDxeBaseAddress|0xff808000
-  gEmbeddedTokenSpaceGuid.PcdDwEmmcDxeClockFrequencyInHz|50000000
-  gEmbeddedTokenSpaceGuid.PcdDwEmmcDxeMaxClockFreqInHz|25000000
-
   #
   # Optional feature to help prevent EFI memory map fragments
   # Turned on and off via: PcdPrePiProduceMemoryTypeInformationHob
