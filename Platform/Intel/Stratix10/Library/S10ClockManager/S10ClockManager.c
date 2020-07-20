@@ -27,6 +27,10 @@ S10ClockManagerGetPerClock() {
     RefClk = MmioRead32(S10_SYSTEM_MANAGER + S10_SYSTEM_MANAGER_BOOTSCRATCH_COLD2);
     RefClk = 5000000;
     break;
+  default:
+    RefClk = MmioRead32(S10_SYSTEM_MANAGER + S10_SYSTEM_MANAGER_BOOTSCRATCH_COLD1);
+    RefClk = 2500000;
+    break;
   }
 
   RefClkDiv = CLOCK_MANAGER_PLLGLOB_REFCLKDIV(PllGlob);
@@ -53,6 +57,10 @@ S10ClockManagerGetMainClock() {
   case CLOCK_MANAGER_PLLGLOB_PSRC_F2S:
     RefClk = MmioRead32(S10_SYSTEM_MANAGER + S10_SYSTEM_MANAGER_BOOTSCRATCH_COLD2);
     RefClk = 5000000;
+    break;
+  default:
+    RefClk = MmioRead32(S10_SYSTEM_MANAGER + S10_SYSTEM_MANAGER_BOOTSCRATCH_COLD1);
+    RefClk = 2500000;
     break;
   }
 
@@ -87,6 +95,8 @@ S10ClockManagerGetL3MainClock() {
   case CLOCK_MANAGER_SRC_FPGA:
     Clock = MmioRead32(S10_SYSTEM_MANAGER + S10_SYSTEM_MANAGER_BOOTSCRATCH_COLD2);
     break;
+  default:
+    return -1;
   }
 
   Clock /= 1 + (MmioRead32(CLOCK_MANAGER_MAINPLL + CLOCK_MANAGER_MAINPLL_NOCCLK) & CLOCK_MANAGER_CNT_MSK);
