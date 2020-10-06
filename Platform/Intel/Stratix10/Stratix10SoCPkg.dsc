@@ -49,8 +49,8 @@
   gArmTokenSpaceGuid.PcdVFPEnabled|1
 
   # System Memory (1GB, minus reserved memory for Linux PSCI calls)
-  gArmTokenSpaceGuid.PcdSystemMemoryBase|0x01000000
-  gArmTokenSpaceGuid.PcdSystemMemorySize|0x3f000000
+  gArmTokenSpaceGuid.PcdSystemMemoryBase|0x01400000
+  gArmTokenSpaceGuid.PcdSystemMemorySize|0x3ec00000
 
   # Arm Architectural Timer
   gArmTokenSpaceGuid.PcdArmArchTimerFreqInHz|400000000
