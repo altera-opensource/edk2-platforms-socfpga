@@ -224,6 +224,10 @@
   TimeBaseLib|EmbeddedPkg/Library/TimeBaseLib/TimeBaseLib.inf
   SemihostLib|ArmPkg/Library/SemihostLib/SemihostLib.inf
 
+  VariablePolicyLib|MdeModulePkg/Library/VariablePolicyLib/VariablePolicyLibRuntimeDxe.inf
+  VariablePolicyHelperLib|MdeModulePkg/Library/VariablePolicyHelperLib/VariablePolicyHelperLib.inf
+  SafeIntLib|MdePkg/Library/BaseSafeIntLib/BaseSafeIntLib.inf
+
   SerialPortLib|MdeModulePkg/Library/BaseSerialPortLib16550/BaseSerialPortLib16550.inf
   PlatformHookLib|Platform/Intel/Stratix10/Library/PlatformHookLib/PlatformHookLib.inf
   S10ClockManager|Platform/Intel/Stratix10/Library/S10ClockManager/S10ClockManager.inf
