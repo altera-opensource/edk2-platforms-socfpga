@@ -31,6 +31,9 @@
   gEfiMdeModulePkgTokenSpaceGuid.PcdSerialClockRate|184320
 
 [PcdsFixedAtBuild.common]
+  gStratix10SocFpgaTokenSpaceGuid.PcdSdBootFilename|L"Image"
+  gStratix10SocFpgaTokenSpaceGuid.PcdSocFpgaBootArgs|L"console=ttyS0,115200 dtb=socfpga_stratix10_socdk.dtb root=/dev/mmcblk0p2"
+
   gEfiMdeModulePkgTokenSpaceGuid.PcdEmuVariableNvModeEnable|TRUE
   gArmPlatformTokenSpaceGuid.PcdCoreCount|1
 

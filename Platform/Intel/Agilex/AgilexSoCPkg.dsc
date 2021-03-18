@@ -31,6 +31,9 @@
   gEfiMdeModulePkgTokenSpaceGuid.PcdSerialClockRate|184320
 
 [PcdsFixedAtBuild.common]
+  gAgilexSocFpgaTokenSpaceGuid.PcdSdBootFilename|L"Image"
+  gAgilexSocFpgaTokenSpaceGuid.PcdSocFpgaBootArgs|L"console=ttyS0,115200 dtb=socfpga_agilex_socdk.dtb root=/dev/mmcblk0p2"
+
   gEfiMdeModulePkgTokenSpaceGuid.PcdEmuVariableNvModeEnable|TRUE
   gArmPlatformTokenSpaceGuid.PcdCoreCount|1
 
@@ -203,6 +206,7 @@
   ReportStatusCodeLib|MdeModulePkg/Library/DxeReportStatusCodeLib/DxeReportStatusCodeLib.inf
   FileExplorerLib|MdeModulePkg/Library/FileExplorerLib/FileExplorerLib.inf
   DxeServicesLib|MdePkg/Library/DxeServicesLib/DxeServicesLib.inf
+  OrderedCollectionLib|MdePkg/Library/BaseOrderedCollectionRedBlackTreeLib/BaseOrderedCollectionRedBlackTreeLib.inf
  
   NonDiscoverableDeviceRegistrationLib|MdeModulePkg/Library/NonDiscoverableDeviceRegistrationLib/NonDiscoverableDeviceRegistrationLib.inf
 

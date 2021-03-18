@@ -38,6 +38,7 @@
   PrintLib
   SerialPortLib
   UefiBootServicesTableLib
+  UefiBootManagerLib
   UefiRuntimeServicesTableLib
   UefiLib
   UefiDriverEntryPoint
@@ -46,6 +47,11 @@
   gEfiDriverBindingProtocolGuid
   gEmbeddedGpioProtocolGuid
   gPlatformDwMmcProtocolGuid
+  gPlatformBootManagerProtocolGuid
+
+[Pcd]
+  gStratix10SocFpgaTokenSpaceGuid.PcdSdBootFilename
+  gStratix10SocFpgaTokenSpaceGuid.PcdSocFpgaBootArgs
 
 [Depex]
   # We depend on these protocols to create the default boot entries

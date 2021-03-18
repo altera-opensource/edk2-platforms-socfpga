@@ -14,10 +14,11 @@
   Include
 
 [Guids.common]
-  gAgilexSoCFpgaTokenSpaceGuid =    { 0xb1b76675, 0xd9b0, 0x4279, { 0x86, 0xa7, 0xcc, 0x60, 0x88, 0x28, 0xf0, 0xb8 } }
+  gAgilexSocFpgaTokenSpaceGuid =    { 0xb1b76675, 0xd9b0, 0x4279, { 0x86, 0xa7, 0xcc, 0x60, 0x88, 0x28, 0xf0, 0xb8 } }
 
 [PcdsFeatureFlag.common]
 
 [PcdsFixedAtBuild.common]
-
+  gAgilexSocFpgaTokenSpaceGuid.PcdSdBootFilename|L""|VOID*|0x00000004
+  gAgilexSocFpgaTokenSpaceGuid.PcdSocFpgaBootArgs|L"console=ttyS0,115200 dtb=socfpga_agilex_socdk.dtb root=/dev/mmbclk0p2"|VOID*|0x00000008
 

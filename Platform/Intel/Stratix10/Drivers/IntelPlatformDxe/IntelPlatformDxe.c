@@ -26,9 +26,16 @@
 #include <Library/UefiBootServicesTableLib.h>
 #include <Library/UefiLib.h>
 #include <Library/UefiRuntimeServicesTableLib.h>
+#include <Library/UefiBootManagerLib.h>
+#include <Library/UefiBootServicesTableLib.h>
+#include <Library/UefiLib.h>
 #include <Protocol/DevicePathFromText.h>
+#include <Protocol/PlatformBootManager.h>
+
 
 #include <Protocol/PlatformDwMmc.h>
+
+#define BOOT_OPTION_NUM 1
 
 DW_MMC_HC_SLOT_CAP
 DwMmcCapability[1] = {
@@ -76,6 +83,76 @@ IntelSocFpgaMmcGetCapability,
 IntelSocFpgaMmcCardDetect
 };
 
+STATIC
+EFI_STATUS
+GetPlatformBootOptionsAndKeys (
+  OUT UINTN                              *BootCount,
+  OUT EFI_BOOT_MANAGER_LOAD_OPTION       **BootOptions,
+  OUT EFI_INPUT_KEY                      **BootKeys
+  )
+{
+  CHAR16                                 *BootFileNameStr;
+  CHAR16                                 *LinuxBootArgs;
+  EFI_STATUS                             Status;
+  UINTN                                  Size;
+  EFI_DEVICE_PATH_PROTOCOL        *FilePath;
+  UINTN                                  NumBootCount;
+
+  NumBootCount = 0;
+  Size = sizeof (EFI_BOOT_MANAGER_LOAD_OPTION) * BOOT_OPTION_NUM;
+  *BootOptions = (EFI_BOOT_MANAGER_LOAD_OPTION *)AllocateZeroPool (Size);
+  if (*BootOptions == NULL) {
+    DEBUG ((DEBUG_ERROR, "Failed to allocate memory for BootOptions\n"));
+    return EFI_OUT_OF_RESOURCES;
+  }
+  Size = sizeof (EFI_INPUT_KEY) * BOOT_OPTION_NUM;
+  *BootKeys = (EFI_INPUT_KEY *)AllocateZeroPool (Size);
+  if (*BootKeys == NULL) {
+    DEBUG ((DEBUG_ERROR, "Failed to allocate memory for BootKeys\n"));
+    Status = EFI_OUT_OF_RESOURCES;
+    goto Error;
+  }
+
+  BootFileNameStr = (CHAR16 *)PcdGetPtr (PcdSdBootFilename);
+  FilePath = FileDevicePath (NULL, BootFileNameStr);
+
+  if (FilePath == NULL) {
+    DEBUG ((DEBUG_ERROR, "Fail to allocate memory for default boot file path. Unable to boot.\n"));
+    goto SkipSdBoot;
+  }
+
+
+  LinuxBootArgs = (CHAR16 *)PcdGetPtr (PcdSocFpgaBootArgs);
+
+  Status = EfiBootManagerInitializeLoadOption (
+             &(*BootOptions)[0],
+             LoadOptionNumberUnassigned,
+             LoadOptionTypeBoot,
+             LOAD_OPTION_ACTIVE,
+             L"Default Boot",
+             FilePath,
+             (UINT8*)LinuxBootArgs,
+             StrLen(LinuxBootArgs)*sizeof(LinuxBootArgs)
+             );
+  ASSERT_EFI_ERROR (Status);
+
+  NumBootCount++;
+
+SkipSdBoot:
+
+  *BootCount = NumBootCount;
+
+  return EFI_SUCCESS;
+Error:
+  FreePool (*BootOptions);
+  return Status;
+}
+
+
+PLATFORM_BOOT_MANAGER_PROTOCOL mPlatformBootManager = {
+  GetPlatformBootOptionsAndKeys
+};
+
 EFI_STATUS
 EFIAPI
 IntelPlatformDxeEntryPoint (
@@ -103,6 +180,17 @@ IntelPlatformDxeEntryPoint (
                   &gPlatformDwMmcProtocolGuid,
                   EFI_NATIVE_INTERFACE,
                   &mDwMmcDevice);
+
+  if (EFI_ERROR (Status)) {
+    return Status;
+  }
+
+  Status = gBS->InstallProtocolInterface (
+                  &ImageHandle,
+                  &gPlatformBootManagerProtocolGuid,
+                  EFI_NATIVE_INTERFACE,
+                  &mPlatformBootManager
+                  );
 
 
   return Status;
