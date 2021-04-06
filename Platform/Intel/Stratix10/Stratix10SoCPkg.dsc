@@ -22,6 +22,13 @@
   OUTPUT_DIRECTORY               = Build/Stratix10SoCPkg
   SECURE_BOOT_ENABLE             = FALSE
 
+!ifndef $(CUSTOM_SOCFPGA_DTB)
+  DEFINE SOCFPGA_DTB=Platform/Intel/Stratix10/DeviceTree/socfpga_stratix10_socdk.dtb
+!else
+  DEFINE SOCFPGA_DTB=$(CUSTOM_SOCFPGA_DTB)
+!endif
+
+
 ################################################################################
 #
 # Pcd Section - list of all EDK II PCD Entries defined by this Platform
@@ -32,7 +39,7 @@
 
 [PcdsFixedAtBuild.common]
   gStratix10SocFpgaTokenSpaceGuid.PcdSdBootFilename|L"Image"
-  gStratix10SocFpgaTokenSpaceGuid.PcdSocFpgaBootArgs|L"console=ttyS0,115200 dtb=socfpga_stratix10_socdk.dtb root=/dev/mmcblk0p2"
+  gStratix10SocFpgaTokenSpaceGuid.PcdSocFpgaBootArgs|L"console=ttyS0,115200 root=/dev/mmcblk0p2"
 
   gEfiMdeModulePkgTokenSpaceGuid.PcdEmuVariableNvModeEnable|TRUE
   gArmPlatformTokenSpaceGuid.PcdCoreCount|1
@@ -501,6 +508,11 @@
   Platform/Intel/Stratix10/Library/PlatformHookLib/PlatformHookLib.inf {
     <LibraryClasses>
     S10ClockManager|Platform/Intel/Stratix10/Library/S10ClockManager/S10ClockManager.inf
+  }
+
+  EmbeddedPkg/Drivers/DtPlatformDxe/DtPlatformDxe.inf {
+    <LibraryClasses>
+      DtPlatformDtbLoaderLib|Platform/Intel/Stratix10/Library/DxeDtPlatformDtbLoaderLib/DxeDtPlatformDtbLoaderLib.inf
   }
 
 [BuildOptions]

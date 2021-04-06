@@ -22,17 +22,23 @@
   OUTPUT_DIRECTORY               = Build/AgilexSoCPkg
   SECURE_BOOT_ENABLE             = FALSE
 
+!ifndef $(CUSTOM_SOCFPGA_DTB)
+  DEFINE SOCFPGA_DTB=Platform/Intel/Agilex/DeviceTree/socfpga_agilex_socdk.dtb
+!else
+  DEFINE SOCFPGA_DTB=$(CUSTOM_SOCFPGA_DTB)
+!endif
 ################################################################################
 #
 # Pcd Section - list of all EDK II PCD Entries defined by this Platform
 #
 ################################################################################
+
 [PcdsPatchableInModule.common]
   gEfiMdeModulePkgTokenSpaceGuid.PcdSerialClockRate|184320
 
 [PcdsFixedAtBuild.common]
   gAgilexSocFpgaTokenSpaceGuid.PcdSdBootFilename|L"Image"
-  gAgilexSocFpgaTokenSpaceGuid.PcdSocFpgaBootArgs|L"console=ttyS0,115200 dtb=socfpga_agilex_socdk.dtb root=/dev/mmcblk0p2"
+  gAgilexSocFpgaTokenSpaceGuid.PcdSocFpgaBootArgs|L"console=ttyS0,115200 root=/dev/mmcblk0p2"
 
   gEfiMdeModulePkgTokenSpaceGuid.PcdEmuVariableNvModeEnable|TRUE
   gArmPlatformTokenSpaceGuid.PcdCoreCount|1
@@ -540,6 +546,12 @@
     <LibraryClasses>
     AgilexClockManager|Platform/Intel/Agilex/Library/AgilexClockManager/AgilexClockManager.inf
   }
+
+  EmbeddedPkg/Drivers/DtPlatformDxe/DtPlatformDxe.inf {
+    <LibraryClasses>
+      DtPlatformDtbLoaderLib|Platform/Intel/Agilex/Library/DxeDtPlatformDtbLoaderLib/DxeDtPlatformDtbLoaderLib.inf
+  }
+
 
 [BuildOptions]
   #-------------------------------

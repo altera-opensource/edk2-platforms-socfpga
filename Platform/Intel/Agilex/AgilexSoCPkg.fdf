@@ -165,6 +165,13 @@ FvNameGuid         = 5eda4200-2c5f-43cb-9da3-0baf74b1b30c
   # FV Filesystem
   INF MdeModulePkg/Universal/FvSimpleFileSystemDxe/FvSimpleFileSystemDxe.inf
 
+  # FDT Installation
+  INF EmbeddedPkg/Drivers/DtPlatformDxe/DtPlatformDxe.inf
+
+  FILE FREEFORM = 25462CDA-221F-47DF-AC1D-259CFAA4E326 {
+    SECTION RAW = $(SOCFPGA_DTB)
+  }
+
 ################################################################################
 #
 # Rules are use with the [FV] section's module INF type to define
@@ -267,6 +274,4 @@ FvNameGuid         = 5eda4200-2c5f-43cb-9da3-0baf74b1b30c
     UI        STRING="$(MODULE_NAME)" Optional
     VERSION   STRING="$(INF_VERSION)" Optional BUILD_NUM=$(BUILD_NUMBER)
   }
-
-
 

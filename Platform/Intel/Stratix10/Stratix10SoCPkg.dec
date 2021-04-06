@@ -20,5 +20,5 @@
 
 [PcdsFixedAtBuild.common]
   gStratix10SocFpgaTokenSpaceGuid.PcdSdBootFilename|L""|VOID*|0x00000004
-  gStratix10SocFpgaTokenSpaceGuid.PcdSocFpgaBootArgs|L"console=ttyS0,115200 dtb=socfpga_stratix10_socdk.dtb root=/dev/mmbclk0p2"|VOID*|0x00000008
+  gStratix10SocFpgaTokenSpaceGuid.PcdSocFpgaBootArgs|L"console=ttyS0,115200 root=/dev/mmbclk0p2"|VOID*|0x00000008
 
