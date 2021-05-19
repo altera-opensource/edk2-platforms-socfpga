@@ -1,0 +1,30 @@
+/** @file
+*
+*  Copyright (c) 2017, Linaro, Ltd. All rights reserved.
+*
+*  SPDX-License-Identifier: BSD-2-Clause-Patent
+*
+**/
+
+[Defines]
+  INF_VERSION                    = 0x00010019
+  BASE_NAME                      = DxeDtPlatformDtbLoaderLib
+  FILE_GUID                      = c03426bc-70b4-4bbd-aafb-8550248586d3
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = DtPlatformDtbLoaderLib|DXE_DRIVER
+
+[Sources]
+  DxeDtPlatformDtbLoaderLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  DxeServicesLib
+  MemoryAllocationLib
+
+[Guids]
+  gDtPlatformDefaultDtbFileGuid
